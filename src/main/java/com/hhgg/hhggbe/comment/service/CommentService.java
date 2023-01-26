@@ -26,7 +26,8 @@ public class CommentService {
 
     @Transactional(readOnly = true)
     public CommentListDto get(Long id) {
-        List<Comment> comments = commentRepository.findAllByPost_Id(id).orElse(new ArrayList<>());
+        //게시글 id 로 댓글 찾기 <- 없을 시 빈 리스트
+        List<Comment> comments = commentRepository.findAllByPost_PostId(id).orElse(new ArrayList<>());
         List<CommentDto> commentDto = comments.stream().map(CommentDto::new).collect(Collectors.toList());
         return new CommentListDto(commentDto);
     }
@@ -43,10 +44,10 @@ public class CommentService {
 
         //대댓글
         if(request.isReply()) {
-            Comment comment = commentRepository.findById(id).orElseThrow(
+            Comment comment = commentRepository.findByCommentIdAndDeletedAtIsNull(id).orElseThrow(
                     () -> new IllegalArgumentException("해당 아이디의 댓글이 존재하지 않습니다.")
             );
-            commentRepository.save(new Comment(user, comment.getPost(), request.getComment(), request.isReply(), comment.getId()));
+            commentRepository.save(new Comment(user, comment.getPost(), request.getComment(), request.isReply(), comment.getCommentId()));
         }
 
         //리턴
@@ -63,17 +64,25 @@ public class CommentService {
     @Transactional
     public ResponseMessageDto delete(Long id, User user) {
         Comment comment = getComment(id, user);
-        commentRepository.delete(comment);
+        //대댓글 찾기
+        List<Comment> replies = commentRepository.findByReferenceIdAndDeletedAtIsNull(comment.getCommentId()).orElse(new ArrayList<>());
+        //대댓글 삭제 상태로 변경
+        replies.forEach(Comment::commentDelete);
+        //댓글 삭제 상태로 변경
+        comment.commentDelete();
         return new ResponseMessageDto(HttpStatus.OK.value(), "댓글 삭제 완료");
     }
 
     private Comment getComment(Long id, User user) {
-        Comment comment = commentRepository.findById(id).orElseThrow(
+        //댓글의 존재 유무 확인
+        Comment comment = commentRepository.findByCommentIdAndDeletedAtIsNull(id).orElseThrow(
                 () -> new IllegalArgumentException("해당 아이디의 댓글이 존재하지 않습니다.")
         );
+        //작성자와 유저의 일치 여부 확인
         if(!comment.getUser().getId().equals(user.getId())) {
             throw new IllegalArgumentException("본인이 작성한 댓글만 수정 / 삭제 가능합니다");
         }
+        //댓글 리턴
         return comment;
     }
 }
