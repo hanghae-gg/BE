@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <list default="true" id="8c2a4b95-db2e-4050-b43a-084f5ca894c9" name="Changes" comment="first commit">
       <change afterPath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/comment/dto/CommentDto.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/comment/dto/CommentListDto.java" afterDir="false" />
@@ -18,6 +19,10 @@
     <list default="true" id="8c2a4b95-db2e-4050-b43a-084f5ca894c9" name="Changes" comment="post기본작업 임시저장">
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/post/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/post/PostRepository.java" afterDir="false" />
 >>>>>>> 4ac0882945da9632a284aacc9619d3e0f770232a
+=======
+    <list default="true" id="8c2a4b95-db2e-4050-b43a-084f5ca894c9" name="Changes" comment="id -&gt; commentId">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+>>>>>>> origin/post
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +44,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="post" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -106,6 +111,7 @@
       <updated>1674636927850</updated>
       <workItem from="1674636929345" duration="1424000" />
       <workItem from="1674645860539" duration="658000" />
+      <workItem from="1674706331802" duration="7000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1674637233496</created>
@@ -128,7 +134,28 @@
       <option name="project" value="LOCAL" />
       <updated>1674702057001</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Post-Comment 연관관계/timestamped 상속">
+      <created>1674702484348</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1674702484348</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Post-Comment 연관관계/timestamped 상속">
+      <created>1674702521123</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1674702521123</updated>
+    </task>
+    <task id="LOCAL-00006" summary="id -&gt; commentId">
+      <created>1674703010384</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1674703010384</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -139,7 +166,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/post" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -148,6 +187,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
     <MESSAGE value="post기본작업 임시저장" />
-    <option name="LAST_COMMIT_MESSAGE" value="post기본작업 임시저장" />
+    <MESSAGE value="Post-Comment 연관관계/timestamped 상속" />
+    <MESSAGE value="id -&gt; commentId" />
+    <option name="LAST_COMMIT_MESSAGE" value="id -&gt; commentId" />
   </component>
 </project>

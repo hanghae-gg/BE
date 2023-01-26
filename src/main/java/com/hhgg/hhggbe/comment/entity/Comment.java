@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class Comment extends Timestamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long commentId;   // 다른 id랑 헷갈릴거같아서 구분해봤습니다
 
     @ManyToOne
     @JoinColumn(nullable = false)

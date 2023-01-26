@@ -1,4 +1,4 @@
-package com.hhgg.hhggbe.post;
+package com.hhgg.hhggbe.post.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -2,7 +2,9 @@ package com.hhgg.hhggbe.post;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hhgg.hhggbe.comment.entity.Comment;
+import com.hhgg.hhggbe.post.dto.PostRequestDto;
 import com.hhgg.hhggbe.timestamped.Timestamped;
+import com.hhgg.hhggbe.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +28,12 @@ public class Post extends Timestamped {
     @JsonIgnore
     private List<Comment> comments = new ArrayList<>();
     private boolean isDelete;
+
+    public Post(PostRequestDto postRequestDto, String imageUrl, User user){
+        this.imageUrl = imageUrl;
+        this.title = postRequestDto.getTitle();
+        this.content = postRequestDto.getContent();
+    }
 
     public void PostPatch(PostRequestDto postRequestDto, String imageUrl){
         this.title = (postRequestDto.getTitle() == null) ? this.getTitle() : postRequestDto.getTitle();
