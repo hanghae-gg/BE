@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8c2a4b95-db2e-4050-b43a-084f5ca894c9" name="Changes" comment="id -&gt; commentId">
+    <list default="true" id="8c2a4b95-db2e-4050-b43a-084f5ca894c9" name="Changes" comment="임시저장">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +32,9 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/comment/entity/Comment.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="JpbToolWindowState">
     <option name="isToolWindowVisible" value="false" />
@@ -170,5 +174,9 @@
     <MESSAGE value="Post-Comment 연관관계/timestamped 상속" />
     <MESSAGE value="id -&gt; commentId" />
     <option name="LAST_COMMIT_MESSAGE" value="id -&gt; commentId" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
