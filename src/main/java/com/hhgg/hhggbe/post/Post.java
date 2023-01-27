@@ -23,6 +23,7 @@ public class Post extends Timestamped {
     private String title;
     private String content;
     private String imageUrl;
+    private Long visit = 0L;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     @JsonIgnore
@@ -47,5 +48,8 @@ public class Post extends Timestamped {
     }
     public void PostDelete(){
         this.isDelete = true;
+    }
+    public void PostVisit() {
+        this.visit += 1L;
     }
 }

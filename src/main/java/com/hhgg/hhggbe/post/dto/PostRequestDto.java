@@ -9,11 +9,11 @@ public class PostRequestDto {
     private String title;
     private String content;
 
-////    @Override
-//    public String toString() {
-//        return "ArticleForm{"+
-//                "title='" + title + '\'' +
-//                "content='" + content +'\'' +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "ArticleForm{"+
+                "title='" + title + '\'' +
+                "content='" + content +'\'' +
+                '}';
+    }
 }

@@ -1,7 +1,9 @@
 package com.hhgg.hhggbe.post.controller;
 
+import com.hhgg.hhggbe.post.PostRepository;
 import com.hhgg.hhggbe.post.dto.PostRequestDto;
 import com.hhgg.hhggbe.post.dto.PostResponseDto;
+import com.hhgg.hhggbe.post.dto.ResponseDto;
 import com.hhgg.hhggbe.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -16,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostController {
     private final PostService postService;
+    private final PostRepository postRepository;
 
     @GetMapping("/")
     public ModelAndView home() {
@@ -23,6 +26,8 @@ public class PostController {
         mv.setViewName("posts");  // 이렇게 하면 되나 ??
         return mv; // view + data pathVariable
     }
+
+    // 게시글 작성하기
     @PostMapping("/posts")
     public PostResponseDto postCreate(@RequestBody PostRequestDto postRequestDto,
                                       @RequestParam(value = "imageUrl", required = false)MultipartFile imageUrl,
@@ -30,8 +35,32 @@ public class PostController {
         return postService.createPost(postRequestDto, imageUrl, userDetailsIpml);
     }
 
+    // 게시글 한개만 불러오기
+    @GetMapping("/posts/{postId}")
+    public PostResponseDto postRead(@PathVariable Long postId){
+        return postService.readPost(postId);
+    }
+
+    // 게시글 목록 불러오기
     @GetMapping("/posts")
     public List<PostResponseDto> postsRead() {
         return postService.readPosts();
     }
+
+    // 게시글 수정하기
+    @PatchMapping("/posts/{postId}")
+    public PostResponseDto postPatch(@PathVariable Long postId,
+                                     @RequestBody PostRequestDto postRequestDto,
+                                     @RequestParam(value = "imageurl", required = false) MultipartFile imageUrl,
+                                     @AuthenticationPrincipal UserDetailsImpl userDetailsimpl) throws  IOException{
+        return postService.patchPost(postId, postRequestDto, imageUrl, userDetailsimpl);
+    }
+
+    //게시글 삭제하기
+    @DeleteMapping("/posts/{postId}")
+    public ResponseDto postDelete(@PathVariable Long postId,
+                                  @AuthenticationPrincipal UserDetailsImpl userDetailsImpl){
+        return postService.deletePost(postId, userDetailsImpl);
+    }
+
 }
