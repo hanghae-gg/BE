@@ -1,5 +1,6 @@
 package com.hhgg.hhggbe.comment.entity;
 
+import com.hhgg.hhggbe.comment.dto.CommentRequestDto;
 import com.hhgg.hhggbe.post.Post;
 import com.hhgg.hhggbe.timestamped.Timestamped;
 import com.hhgg.hhggbe.user.User;
@@ -8,6 +9,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @Entity
