@@ -5,6 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8c2a4b95-db2e-4050-b43a-084f5ca894c9" name="Changes" comment="임시저장2" />
+
+    <list default="true" id="8c2a4b95-db2e-4050-b43a-084f5ca894c9" name="Changes" comment="first commit">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/comment/dto/CommentDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/comment/dto/CommentListDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/comment/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/comment/controller/CommentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/comment/dto/CommentRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/comment/dto/CommentRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/comment/dto/ResponseMessageDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/comment/dto/ResponseMessageDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/comment/entity/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/comment/entity/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/comment/repository/CommentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/comment/repository/CommentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/comment/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/comment/service/CommentService.java" afterDir="false" />
+    <list default="true" id="8c2a4b95-db2e-4050-b43a-084f5ca894c9" name="Changes" comment="post기본작업 임시저장">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/post/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/post/PostRepository.java" afterDir="false" />
+    <list default="true" id="8c2a4b95-db2e-4050-b43a-084f5ca894c9" name="Changes" comment="id -&gt; commentId">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

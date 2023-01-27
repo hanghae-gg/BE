@@ -1,5 +1,6 @@
 package com.hhgg.hhggbe.comment.controller;
 
+import com.hhgg.hhggbe.comment.dto.CommentListDto;
 import com.hhgg.hhggbe.comment.dto.CommentRequestDto;
 import com.hhgg.hhggbe.comment.dto.ResponseMessageDto;
 import com.hhgg.hhggbe.comment.service.CommentService;
@@ -12,6 +13,11 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class CommentController {
     CommentService commentService;
+
+    @GetMapping("/comments/{postId}")
+    public CommentListDto get(@PathVariable(value = "postId") Long id) {
+        return commentService.get(id);
+    }
 
     @PostMapping("/comments/{postId}")
     public ResponseMessageDto create(@PathVariable(value = "postId") Long id, @RequestBody CommentRequestDto request, @AuthenticationPrincipal UserDetails userDetails) {
