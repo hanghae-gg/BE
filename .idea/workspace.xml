@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8c2a4b95-db2e-4050-b43a-084f5ca894c9" name="Changes" comment="임시저장">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-    </list>
+    <list default="true" id="8c2a4b95-db2e-4050-b43a-084f5ca894c9" name="Changes" comment="임시저장2" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -139,7 +136,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674703010384</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="임시저장2">
+      <created>1674780702934</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1674780702934</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -150,19 +154,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="origin/post" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -173,7 +165,8 @@
     <MESSAGE value="post기본작업 임시저장" />
     <MESSAGE value="Post-Comment 연관관계/timestamped 상속" />
     <MESSAGE value="id -&gt; commentId" />
-    <option name="LAST_COMMIT_MESSAGE" value="id -&gt; commentId" />
+    <MESSAGE value="임시저장2" />
+    <option name="LAST_COMMIT_MESSAGE" value="임시저장2" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
