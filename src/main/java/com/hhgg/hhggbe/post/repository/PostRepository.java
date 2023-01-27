@@ -1,6 +1,7 @@
-package com.hhgg.hhggbe.post;
+package com.hhgg.hhggbe.post.repository;
 
 
+import com.hhgg.hhggbe.post.entity.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

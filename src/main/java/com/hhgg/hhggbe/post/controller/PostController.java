@@ -1,11 +1,12 @@
 package com.hhgg.hhggbe.post.controller;
 
-import com.hhgg.hhggbe.post.PostRepository;
+import com.hhgg.hhggbe.post.repository.PostRepository;
 import com.hhgg.hhggbe.post.dto.PostRequestDto;
 import com.hhgg.hhggbe.post.dto.PostResponseDto;
 import com.hhgg.hhggbe.post.dto.ResponseDto;
 import com.hhgg.hhggbe.post.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,7 +38,7 @@ public class PostController {
 
     // 게시글 한개만 불러오기
     @GetMapping("/posts/{postId}")
-    public PostResponseDto postRead(@PathVariable Long postId){
+    public ResponseEntity<PostResponseDto> postRead(@PathVariable Long postId){
         return postService.readPost(postId);
     }
 

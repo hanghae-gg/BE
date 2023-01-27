@@ -1,4 +1,4 @@
-package com.hhgg.hhggbe.post;
+package com.hhgg.hhggbe.post.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hhgg.hhggbe.comment.entity.Comment;

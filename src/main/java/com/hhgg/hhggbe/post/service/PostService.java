@@ -1,18 +1,21 @@
 package com.hhgg.hhggbe.post.service;
 
+import com.amazonaws.Response;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.hhgg.hhggbe.comment.entity.Comment;
-import com.hhgg.hhggbe.post.Post;
-import com.hhgg.hhggbe.post.PostRepository;
+import com.hhgg.hhggbe.post.dto.ResponseDataDto;
+import com.hhgg.hhggbe.post.entity.Post;
+import com.hhgg.hhggbe.post.repository.PostRepository;
 import com.hhgg.hhggbe.post.dto.PostRequestDto;
 import com.hhgg.hhggbe.post.dto.PostResponseDto;
 import com.hhgg.hhggbe.post.dto.ResponseDto;
-import jakarta.transaction.TransactionScoped;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -84,7 +87,7 @@ public class PostService {
 
 
     //특정 게시물 불러오기
-    public PostResponseDto readPost(Long postId){
+    public ResponseEntity<ResponseDataDto> readPost(Long postId){
         Optional<Post> post = postRepository.findByPostId(postId);
 
         if (post.get().isDelete()){
@@ -92,7 +95,7 @@ public class PostService {
         }
         post.get().PostVisit();
         postRepository.save(post.get());  // post를 불러오기 전에 visit를 증가시키고 저장
-        return new PostResponseDto(post.get());
+//        return new PostResponseDto(post.get());
     }
 
 
