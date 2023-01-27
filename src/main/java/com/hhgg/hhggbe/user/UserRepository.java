@@ -1,4 +1,4 @@
-package com.hhgg.hhggbe.Repository;
+package com.hhgg.hhggbe.user;
 
 import com.hhgg.hhggbe.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;

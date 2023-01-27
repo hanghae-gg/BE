@@ -1,4 +1,4 @@
-package com.hhgg.hhggbe.config;
+package com.hhgg.hhggbe.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
