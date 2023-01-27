@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-<<<<<<< HEAD
-<<<<<<< HEAD
+    <list default="true" id="8c2a4b95-db2e-4050-b43a-084f5ca894c9" name="Changes" comment="임시저장2" />
+
     <list default="true" id="8c2a4b95-db2e-4050-b43a-084f5ca894c9" name="Changes" comment="first commit">
       <change afterPath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/comment/dto/CommentDto.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/comment/dto/CommentListDto.java" afterDir="false" />
@@ -15,14 +15,10 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/comment/entity/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/comment/entity/Comment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/comment/repository/CommentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/comment/repository/CommentRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/comment/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/comment/service/CommentService.java" afterDir="false" />
-=======
     <list default="true" id="8c2a4b95-db2e-4050-b43a-084f5ca894c9" name="Changes" comment="post기본작업 임시저장">
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/post/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/post/PostRepository.java" afterDir="false" />
->>>>>>> 4ac0882945da9632a284aacc9619d3e0f770232a
-=======
     <list default="true" id="8c2a4b95-db2e-4050-b43a-084f5ca894c9" name="Changes" comment="id -&gt; commentId">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
->>>>>>> origin/post
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +44,9 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/hhgg/hhggbe/comment/entity/Comment.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="JpbToolWindowState">
     <option name="isToolWindowVisible" value="false" />
@@ -84,14 +83,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-<<<<<<< HEAD
-=======
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.hhgg.hhggbe.post" />
     </key>
   </component>
->>>>>>> 4ac0882945da9632a284aacc9619d3e0f770232a
   <component name="RunManager">
     <configuration name="HHggBeApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="HHggBE.main" />
@@ -155,7 +151,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674703010384</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="임시저장2">
+      <created>1674780702934</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1674780702934</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -166,19 +169,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="origin/post" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -189,6 +180,11 @@
     <MESSAGE value="post기본작업 임시저장" />
     <MESSAGE value="Post-Comment 연관관계/timestamped 상속" />
     <MESSAGE value="id -&gt; commentId" />
-    <option name="LAST_COMMIT_MESSAGE" value="id -&gt; commentId" />
+    <MESSAGE value="임시저장2" />
+    <option name="LAST_COMMIT_MESSAGE" value="임시저장2" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
