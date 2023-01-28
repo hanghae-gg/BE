@@ -2,11 +2,12 @@ package com.hhgg.hhggbe.post.dto;
 
 import com.hhgg.hhggbe.comment.dto.CommentDto;
 import com.hhgg.hhggbe.post.entity.Post;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
+@Getter
 public class PostResponseDto {
     private Long postId;
     private String title;

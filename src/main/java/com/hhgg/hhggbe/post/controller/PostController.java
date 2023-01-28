@@ -1,5 +1,6 @@
 package com.hhgg.hhggbe.post.controller;
 
+import com.amazonaws.Response;
 import com.hhgg.hhggbe.post.dto.ResponseDataDto;
 import com.hhgg.hhggbe.post.repository.PostRepository;
 import com.hhgg.hhggbe.post.dto.PostRequestDto;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -33,36 +35,35 @@ public class PostController {
 
     // 게시글 작성하기
     @PostMapping("/posts")
-    public ResponseDataDto postCreate(@RequestBody PostRequestDto postRequestDto,
+    public ResponseEntity<PostResponseDto> postCreate(@RequestBody PostRequestDto postRequestDto,
                                       @RequestParam(value = "imageUrl", required = false)MultipartFile imageUrl,
                                       @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) throws IOException {
         PostResponseDto postResponseDto = postService.createPost(postRequestDto, imageUrl, userDetailsImpl);
-        return new ResponseDataDto(201, "게시글이 성공적으로 작성되었습니다.", postResponseDto);
+        return new ResponseEntity<>(postResponseDto, HttpStatus.CREATED);
     }
 
     // 게시글 한개만 불러오기
     @GetMapping("/posts/{postId}")
-    public ResponseEntity<ResponseDataDto> postRead(@PathVariable Long postId){
+    public ResponseEntity<PostResponseDto> postRead(@PathVariable Long postId){
         PostResponseDto post = postService.readPost(postId);
-        ResponseDataDto dataDto = new ResponseDataDto(200, "게시글 조회 성공", post);
-        return new ResponseEntity<>(dataDto, HttpStatus.OK);
+        return new ResponseEntity<>(post, HttpStatus.OK);
     }
 
     // 게시글 목록 불러오기
     @GetMapping("/posts")
-    public List<PostResponseDto> postsRead() {
-        return postService.readPosts();
+    public ResponseEntity<List<PostResponseDto>> postsRead() {
+        List<PostResponseDto> posts = postService.readPosts();
+        return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
     // 게시글 수정하기
     @PatchMapping("/posts/{postId}")
-    public ResponseEntity<ResponseDataDto> postPatch(@PathVariable Long postId,
+    public ResponseEntity<PostResponseDto> postPatch(@PathVariable Long postId,
                                      @RequestBody PostRequestDto postRequestDto,
                                      @RequestParam(value = "imageurl", required = false) MultipartFile imageUrl,
                                      @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) throws  IOException{
         PostResponseDto postResponseDto = postService.patchPost(postId, postRequestDto, imageUrl, userDetailsImpl);
-        ResponseDataDto dataDto = new ResponseDataDto(201, "게시글이 성공적으로 수정되었습니다.", postResponseDto);
-        return new ResponseEntity<>(dataDto, HttpStatus.CREATED);
+        return new ResponseEntity<>(postResponseDto, HttpStatus.CREATED);
     }
 
     //게시글 삭제하기
