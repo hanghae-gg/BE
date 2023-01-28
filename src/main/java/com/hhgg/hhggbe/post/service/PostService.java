@@ -4,13 +4,16 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.hhgg.hhggbe.comment.dto.CommentDto;
 import com.hhgg.hhggbe.comment.entity.Comment;
-import com.hhgg.hhggbe.post.Post;
-import com.hhgg.hhggbe.post.PostRepository;
+import com.hhgg.hhggbe.comment.repository.CommentRepository;
 import com.hhgg.hhggbe.post.dto.PostRequestDto;
 import com.hhgg.hhggbe.post.dto.PostResponseDto;
 import com.hhgg.hhggbe.post.dto.ResponseDto;
-import jakarta.transaction.TransactionScoped;
+import com.hhgg.hhggbe.post.entity.Post;
+import com.hhgg.hhggbe.post.repository.PostRepository;
+import com.hhgg.hhggbe.security.UserDetailsImpl;
+import com.hhgg.hhggbe.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,12 +25,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class PostService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
+    private final CommentRepository commentRepository;
     private String S3Bucket = "";  // bucket이름
 
     @Autowired
@@ -37,7 +42,7 @@ public class PostService {
     //게시물 작성
     public PostResponseDto createPost(PostRequestDto postRequestDto,
                                       MultipartFile imageUrl,
-                                      UserDetailsIpml userDetailsIpml) throws IOException {
+                                      UserDetailsImpl userDetailsImpl) throws IOException {
         String imageUrlString;
 
         if (imageUrl != null) {
@@ -61,22 +66,24 @@ public class PostService {
         }else {
             imageUrlString = "";
         }
-        Post post = new Post(postRequestDto, imageUrlString, userDetailsIpml.getUser());
+        Post post = new Post(postRequestDto, imageUrlString, userDetailsImpl.getUser());
         postRepository.save(post);
-        return new PostResponseDto(post);
+        return new PostResponseDto(post, new ArrayList<>());
     }
 
 
     // 게시물 모두 불러오기
     public List<PostResponseDto> readPosts() {
-        List<Post> posts = postRepository.findAllByOrderByCreatedAtDesc();
+        List<Post> posts = postRepository.findAllByOrderByCreateAtDesc();
         List<PostResponseDto> postResponseDtos = new ArrayList<>();
 
         for (Post post : posts) {
             if (post.isDelete()) {
                 continue;
             }
-            PostResponseDto postResponseDto = new PostResponseDto(post);
+            List<Comment> comments = commentRepository.findAllByPost_PostId(post.getPostId()).orElse(new ArrayList<>());
+            List<CommentDto> commentDto = comments.stream().map(CommentDto::new).collect(Collectors.toList());
+            PostResponseDto postResponseDto = new PostResponseDto(post, commentDto);
             postResponseDtos.add(postResponseDto);
         }
         return postResponseDtos;
@@ -92,7 +99,10 @@ public class PostService {
         }
         post.get().PostVisit();
         postRepository.save(post.get());  // post를 불러오기 전에 visit를 증가시키고 저장
-        return new PostResponseDto(post.get());
+
+        List<Comment> comments = commentRepository.findAllByPost_PostId(postId).orElse(new ArrayList<>());
+        List<CommentDto> commentDto = comments.stream().map(CommentDto::new).collect(Collectors.toList());
+        return new PostResponseDto(post.get(), commentDto);
     }
 
 
@@ -107,7 +117,7 @@ public class PostService {
             throw new IllegalArgumentException("이미 삭제된 게시물입니다.");
         }
         //본인이 작성한 게시물인지 확인
-        if (!post.get().getUser().getId().equals(userDetailsImpl.getUser().getId())) {
+        if (!post.get().getUser().getUserId().equals(userDetailsImpl.getUser().getUserId())) {
             throw new IllegalArgumentException("권한이 없습니다.");
         }
 
@@ -134,7 +144,9 @@ public class PostService {
             post.get().PostPatchNoImage(postRequestDto);
         }
 
-        return new PostResponseDto(post.get());
+        List<Comment> comments = commentRepository.findAllByPost_PostId(postId).orElse(new ArrayList<>());
+        List<CommentDto> commentDto = comments.stream().map(CommentDto::new).collect(Collectors.toList());
+        return new PostResponseDto(post.get(), commentDto);
     }
 
 
@@ -142,18 +154,21 @@ public class PostService {
     @Transactional
     public ResponseDto deletePost(Long postId, UserDetailsImpl userDetailsImpl) {
         Optional<Post> post = postRepository.findByPostId(postId);
-        if (!post.get().isDelete()) {
-            post.get().PostDelete();
-            List<Comment> comments = post.get().getComments();
-            for (Comment comment : comments) {
-                comment.commentDelete();  // 이렇게 하면 되나요?
+        if (post.isPresent()){
+            if (!post.get().isDelete()) {
+                post.get().PostDelete();
+                List<Comment> comments = post.get().getComments();
+                for (Comment comment : comments) {
+                    comment.commentDelete();  // 이렇게 하면 되나요? 되는군요
+                }
+            } else {
+                throw new IllegalArgumentException("이미 삭제된 게시물입니다.");
             }
-        } else {
-            throw new IllegalArgumentException("이미 삭제된 게시물입니다.");
+            if (!post.get().getUser().getUserId().equals(userDetailsImpl.getUser().getUserId())) {
+                throw new IllegalArgumentException("권한이 없습니다.");
+            }
         }
-        if (!post.get().getUser().getId().equals(userDetailsImpl.getUser().getId())) {
-            throw new IllegalArgumentException("권한이 없습니다.");
-        }
+
         post.get().PostDelete();
         ResponseDto responseDto = new ResponseDto();
         responseDto.ResponseTrue();

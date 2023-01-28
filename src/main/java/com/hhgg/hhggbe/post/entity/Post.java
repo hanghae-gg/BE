@@ -1,10 +1,10 @@
-package com.hhgg.hhggbe.post;
+package com.hhgg.hhggbe.post.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hhgg.hhggbe.comment.entity.Comment;
 import com.hhgg.hhggbe.post.dto.PostRequestDto;
 import com.hhgg.hhggbe.timestamped.Timestamped;
-import com.hhgg.hhggbe.user.User;
+import com.hhgg.hhggbe.user.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +24,8 @@ public class Post extends Timestamped {
     private String content;
     private String imageUrl;
     private Long visit = 0L;
+    @ManyToOne
+    private User user;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     @JsonIgnore
@@ -34,6 +36,7 @@ public class Post extends Timestamped {
         this.imageUrl = imageUrl;
         this.title = postRequestDto.getTitle();
         this.content = postRequestDto.getContent();
+        this.user = user;
     }
 
     public void PostPatch(PostRequestDto postRequestDto, String imageUrl){

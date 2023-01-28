@@ -6,9 +6,9 @@ import com.hhgg.hhggbe.comment.dto.CommentRequestDto;
 import com.hhgg.hhggbe.comment.dto.ResponseMessageDto;
 import com.hhgg.hhggbe.comment.entity.Comment;
 import com.hhgg.hhggbe.comment.repository.CommentRepository;
-import com.hhgg.hhggbe.post.Post;
-import com.hhgg.hhggbe.post.PostRepository;
-import com.hhgg.hhggbe.user.User;
+import com.hhgg.hhggbe.post.entity.Post;
+import com.hhgg.hhggbe.post.repository.PostRepository;
+import com.hhgg.hhggbe.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -79,7 +79,7 @@ public class CommentService {
                 () -> new IllegalArgumentException("해당 아이디의 댓글이 존재하지 않습니다.")
         );
         //작성자와 유저의 일치 여부 확인
-        if(!comment.getUser().getId().equals(user.getId())) {
+        if(!comment.getUser().getUserId().equals(user.getUserId())) {
             throw new IllegalArgumentException("본인이 작성한 댓글만 수정 / 삭제 가능합니다");
         }
         //댓글 리턴
