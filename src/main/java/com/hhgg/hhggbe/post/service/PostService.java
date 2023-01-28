@@ -87,7 +87,7 @@ public class PostService {
 
 
     //특정 게시물 불러오기
-    public ResponseEntity<ResponseDataDto> readPost(Long postId){
+    public PostResponseDto readPost(Long postId){
         Optional<Post> post = postRepository.findByPostId(postId);
 
         if (post.get().isDelete()){
@@ -95,7 +95,7 @@ public class PostService {
         }
         post.get().PostVisit();
         postRepository.save(post.get());  // post를 불러오기 전에 visit를 증가시키고 저장
-//        return new PostResponseDto(post.get());
+        return new PostResponseDto(post.get());
     }
 
 

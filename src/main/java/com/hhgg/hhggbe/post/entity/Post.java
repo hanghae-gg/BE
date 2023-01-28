@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hhgg.hhggbe.comment.entity.Comment;
 import com.hhgg.hhggbe.post.dto.PostRequestDto;
 import com.hhgg.hhggbe.timestamped.Timestamped;
-import com.hhgg.hhggbe.user.User;
+import com.hhgg.hhggbe.user.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

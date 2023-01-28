@@ -8,7 +8,7 @@ import com.hhgg.hhggbe.comment.entity.Comment;
 import com.hhgg.hhggbe.comment.repository.CommentRepository;
 import com.hhgg.hhggbe.post.entity.Post;
 import com.hhgg.hhggbe.post.repository.PostRepository;
-import com.hhgg.hhggbe.user.User;
+import com.hhgg.hhggbe.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
