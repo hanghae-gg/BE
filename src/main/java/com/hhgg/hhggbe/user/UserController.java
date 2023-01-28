@@ -61,4 +61,13 @@ public class UserController {
         return "redirect:/users/login";
     }
 
+    @PostMapping("/login")
+    public String login(@AuthenticationPrincipal UserDetails userDetails) {
+        System.out.println("*********************************************************");
+        System.out.println("UserController.login");
+        System.out.println("userDetails.getUserName() = " + userDetails.getUserName());
+        System.out.println("*********************************************************");
+
+        return "redirect:/users/login";
+    }
 }
