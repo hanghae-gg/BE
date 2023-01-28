@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 public class CommentController {
-    CommentService commentService;
+    private final CommentService commentService;
 
     @GetMapping("/comments/{postId}")
     public CommentListDto get(@PathVariable(value = "postId") Long id) {

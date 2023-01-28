@@ -1,23 +1,23 @@
 package com.hhgg.hhggbe.user.controller;
 
-import com.hhgg.hhggbe.user.dto.AuthMessage;
-import com.hhgg.hhggbe.user.dto.LoginErrorMessage;
-import com.hhgg.hhggbe.user.dto.LoginRequestDto;
-import com.hhgg.hhggbe.user.dto.SignupRequestDto;
+import com.hhgg.hhggbe.user.dto.*;
 import com.hhgg.hhggbe.user.service.UserService;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.servlet.http.HttpServletResponse;
 
 import static org.springframework.http.HttpStatus.*;
 
+
+@Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
-    private final UserService userService;
 
+    private final UserService userService;
     @PostMapping("/signup")  //@RequestBody
     public ResponseEntity<AuthMessage> signup(@RequestBody SignupRequestDto signupRequestDto) {
         userService.signup(signupRequestDto);
@@ -29,6 +29,8 @@ public class UserController {
     @PostMapping("/login") //@RequestBody
     public LoginErrorMessage login(@RequestBody LoginRequestDto loginRequestDto,
                                    HttpServletResponse response) {
+        log.info("*******************"+loginRequestDto.getUsername());
         return userService.login(loginRequestDto, response);
     }
+
 }

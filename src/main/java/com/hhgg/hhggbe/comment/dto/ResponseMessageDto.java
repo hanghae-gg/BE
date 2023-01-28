@@ -1,5 +1,8 @@
 package com.hhgg.hhggbe.comment.dto;
 
+import lombok.Getter;
+
+@Getter
 public class ResponseMessageDto {
     int status;
     String message;

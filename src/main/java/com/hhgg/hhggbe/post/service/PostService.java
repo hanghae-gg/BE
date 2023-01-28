@@ -121,7 +121,7 @@ public class PostService {
             throw new IllegalArgumentException("이미 삭제된 게시물입니다.");
         }
         //본인이 작성한 게시물인지 확인
-        if (!post.getUser().getUserId().equals(userDetailsImpl.getUser().getUserId())) {
+        if (!post.getUser().getId().equals(userDetailsImpl.getUser().getId())) {
             throw new IllegalArgumentException("권한이 없습니다.");
         }
 
@@ -168,7 +168,7 @@ public class PostService {
             } else {
                 throw new IllegalArgumentException("이미 삭제된 게시물입니다.");
             }
-            if (!post.get().getUser().getUserId().equals(userDetailsImpl.getUser().getUserId())) {
+            if (!post.get().getUser().getId().equals(userDetailsImpl.getUser().getId())) {
                 throw new IllegalArgumentException("권한이 없습니다.");
             }
         }

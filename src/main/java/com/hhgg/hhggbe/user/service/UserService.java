@@ -39,13 +39,14 @@ public class UserService {
 
         UserRoleEnum userRoleEnum = UserRoleEnum.USER;
 
-        User user = new User(username, password, email, userRoleEnum);
+        User user = new User(username, email, password, userRoleEnum);
         userRepository.save(user);
     }
 
     public LoginErrorMessage login(LoginRequestDto loginRequestDto, HttpServletResponse response) {
         String username = loginRequestDto.getUsername();
         String password = loginRequestDto.getPassword();
+        System.out.println("****************username : "+username);
 
         if (username == null || password == null || username.equals("") || password.equals("")) {
             return new LoginErrorMessage(400, "아이디 또는 비밀번호가 입력되지 않았습니다.", null);

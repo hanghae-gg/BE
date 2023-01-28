@@ -21,8 +21,8 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class CommentService {
-    CommentRepository commentRepository;
-    PostRepository postRepository;
+    private final CommentRepository commentRepository;
+    private final PostRepository postRepository;
 
     @Transactional(readOnly = true)
     public CommentListDto get(Long id) {
@@ -79,7 +79,7 @@ public class CommentService {
                 () -> new IllegalArgumentException("해당 아이디의 댓글이 존재하지 않습니다.")
         );
         //작성자와 유저의 일치 여부 확인
-        if(!comment.getUser().getUserId().equals(user.getUserId())) {
+        if(!comment.getUser().getId().equals(user.getId())) {
             throw new IllegalArgumentException("본인이 작성한 댓글만 수정 / 삭제 가능합니다");
         }
         //댓글 리턴
