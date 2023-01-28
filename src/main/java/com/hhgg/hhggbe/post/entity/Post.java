@@ -18,7 +18,7 @@ import java.util.List;
 public class Post extends Timestamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long postId;
+    private Long postId;
 
     private String title;
     private String content;

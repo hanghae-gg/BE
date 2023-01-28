@@ -81,7 +81,7 @@ public class PostService {
             if (post.isDelete()) {
                 continue;
             }
-            List<Comment> comments = commentRepository.findAllByPost_PostId(post.getPostId()).orElse(new ArrayList<>());
+            List<Comment> comments = post.getComments();
             List<CommentDto> commentDto = comments.stream().map(CommentDto::new).collect(Collectors.toList());
             PostResponseDto postResponseDto = new PostResponseDto(post, commentDto);
             postResponseDtos.add(postResponseDto);
@@ -92,17 +92,19 @@ public class PostService {
 
     //특정 게시물 불러오기
     public PostResponseDto readPost(Long postId){
-        Optional<Post> post = postRepository.findByPostId(postId);
+        Post post = postRepository.findByPostId(postId).orElseThrow(
+                () -> new IllegalArgumentException("해당 아이디의 게시글이 존재하지 않습니다.")
+        );
 
-        if (post.get().isDelete()){
+        if (post.isDelete()){
             throw new IllegalArgumentException("이미 삭제된 게시물입니다.");
         }
-        post.get().PostVisit();
-        postRepository.save(post.get());  // post를 불러오기 전에 visit를 증가시키고 저장
+        post.PostVisit();
+        postRepository.save(post);  // post를 불러오기 전에 visit를 증가시키고 저장
 
-        List<Comment> comments = commentRepository.findAllByPost_PostId(postId).orElse(new ArrayList<>());
+        List<Comment> comments = post.getComments();
         List<CommentDto> commentDto = comments.stream().map(CommentDto::new).collect(Collectors.toList());
-        return new PostResponseDto(post.get(), commentDto);
+        return new PostResponseDto(post, commentDto);
     }
 
 
@@ -111,13 +113,15 @@ public class PostService {
     public PostResponseDto patchPost(Long postId, PostRequestDto postRequestDto,
                                      MultipartFile imageUrl,
                                      UserDetailsImpl userDetailsImpl) throws IOException{
-        Optional<Post> post = postRepository.findByPostId(postId);
+        Post post = postRepository.findByPostId(postId).orElseThrow(
+                () -> new IllegalArgumentException("해당 아이디의 게시글이 존재하지 않습니다")
+        );
         //삭제된 게시물인지 확인
-        if (post.get().isDelete()){
+        if (post.isDelete()){
             throw new IllegalArgumentException("이미 삭제된 게시물입니다.");
         }
         //본인이 작성한 게시물인지 확인
-        if (!post.get().getUser().getUserId().equals(userDetailsImpl.getUser().getUserId())) {
+        if (!post.getUser().getUserId().equals(userDetailsImpl.getUser().getUserId())) {
             throw new IllegalArgumentException("권한이 없습니다.");
         }
 
@@ -136,17 +140,17 @@ public class PostService {
                 );
                 // 접근 가능한 URL 가져오기
                 String imageUrlString = amazonS3Client.getUrl(S3Bucket, originName).toString();
-                post.get().PostPatch(postRequestDto, imageUrlString);
+                post.PostPatch(postRequestDto, imageUrlString);
             } else {
-                post.get().PostPatchNoImage(postRequestDto);
+                post.PostPatchNoImage(postRequestDto);
             }
         }else {
-            post.get().PostPatchNoImage(postRequestDto);
+            post.PostPatchNoImage(postRequestDto);
         }
 
-        List<Comment> comments = commentRepository.findAllByPost_PostId(postId).orElse(new ArrayList<>());
+        List<Comment> comments = post.getComments();
         List<CommentDto> commentDto = comments.stream().map(CommentDto::new).collect(Collectors.toList());
-        return new PostResponseDto(post.get(), commentDto);
+        return new PostResponseDto(post, commentDto);
     }
 
 

@@ -6,8 +6,9 @@ import com.hhgg.hhggbe.post.entity.Post;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 public class PostResponseDto {
-    private long postId;
+    private Long postId;
     private String title;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
