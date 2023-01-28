@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 public class ResponseDataDto {
     private Integer status;
     private String message;
-    private Object Data;
+    private PostResponseDto postResponseDto;
 
-    public ResponseDataDto(Integer status, String message, Object data) {
+    public ResponseDataDto(Integer status, String message, PostResponseDto postResponseDto) {
         this.status = status;
         this.message = message;
-        Data = data;
+        this.postResponseDto = postResponseDto;
     }
 }

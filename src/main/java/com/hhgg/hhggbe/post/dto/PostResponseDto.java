@@ -1,9 +1,7 @@
 package com.hhgg.hhggbe.post.dto;
 
-import com.hhgg.hhggbe.comment.dto.CommentListDto;
+import com.hhgg.hhggbe.comment.dto.CommentDto;
 import com.hhgg.hhggbe.post.entity.Post;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -16,9 +14,9 @@ public class PostResponseDto {
     private String content;
     private Long visit;
     private String imageUrl;
-    private List<CommentListDto> comments = new ArrayList<>();
+    private List<CommentDto> comments = new ArrayList<>();
 
-    public PostResponseDto(Post post){
+    public PostResponseDto(Post post, List<CommentDto> comments){
         this.postId = post.getPostId();
         this.title = post.getTitle();
         this.createdAt = post.getCreateAt();
@@ -26,5 +24,6 @@ public class PostResponseDto {
         this.content = post.getContent();
         this.visit = post.getVisit();
         this.imageUrl = post.getImageUrl();
+        this.comments = comments;
     }
 }

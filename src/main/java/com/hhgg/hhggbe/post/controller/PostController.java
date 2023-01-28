@@ -1,12 +1,12 @@
 package com.hhgg.hhggbe.post.controller;
 
 import com.hhgg.hhggbe.post.dto.ResponseDataDto;
-import com.hhgg.hhggbe.post.entity.Post;
 import com.hhgg.hhggbe.post.repository.PostRepository;
 import com.hhgg.hhggbe.post.dto.PostRequestDto;
 import com.hhgg.hhggbe.post.dto.PostResponseDto;
 import com.hhgg.hhggbe.post.dto.ResponseDto;
 import com.hhgg.hhggbe.post.service.PostService;
+import com.hhgg.hhggbe.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,12 +33,11 @@ public class PostController {
 
     // 게시글 작성하기
     @PostMapping("/posts")
-    public ResponseEntity<ResponseDataDto> postCreate(@RequestBody PostRequestDto postRequestDto,
+    public ResponseDataDto postCreate(@RequestBody PostRequestDto postRequestDto,
                                       @RequestParam(value = "imageUrl", required = false)MultipartFile imageUrl,
-                                      @AuthenticationPrincipal UserDetailsIpml userDetailsIpml) throws IOException {
-        PostResponseDto postResponseDto = postService.createPost(postRequestDto, imageUrl, userDetailsIpml);
-        ResponseDataDto dataDto = new ResponseDataDto(201, "게시글이 성공적으로 작성되었습니다.", postResponseDto);
-        return new ResponseEntity<>(dataDto, HttpStatus.CREATED);
+                                      @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) throws IOException {
+        PostResponseDto postResponseDto = postService.createPost(postRequestDto, imageUrl, userDetailsImpl);
+        return new ResponseDataDto(201, "게시글이 성공적으로 작성되었습니다.", postResponseDto);
     }
 
     // 게시글 한개만 불러오기
@@ -51,10 +50,8 @@ public class PostController {
 
     // 게시글 목록 불러오기
     @GetMapping("/posts")
-    public ResponseEntity<ResponseDataDto> postsRead() {
-        List<PostResponseDto> posts = postService.readPosts();
-        ResponseDataDto dataDto = new ResponseDataDto(200, "전체 게시글 목록 조회", posts);
-        return new ResponseEntity<>(dataDto, HttpStatus.OK);
+    public List<PostResponseDto> postsRead() {
+        return postService.readPosts();
     }
 
     // 게시글 수정하기
@@ -62,19 +59,18 @@ public class PostController {
     public ResponseEntity<ResponseDataDto> postPatch(@PathVariable Long postId,
                                      @RequestBody PostRequestDto postRequestDto,
                                      @RequestParam(value = "imageurl", required = false) MultipartFile imageUrl,
-                                     @AuthenticationPrincipal UserDetailsImpl userDetailsimpl) throws  IOException{
-        PostResponseDto postResponseDto = postService.patchPost(postId, postRequestDto, imageUrl, userDetailsimpl);
+                                     @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) throws  IOException{
+        PostResponseDto postResponseDto = postService.patchPost(postId, postRequestDto, imageUrl, userDetailsImpl);
         ResponseDataDto dataDto = new ResponseDataDto(201, "게시글이 성공적으로 수정되었습니다.", postResponseDto);
         return new ResponseEntity<>(dataDto, HttpStatus.CREATED);
     }
 
     //게시글 삭제하기
     @DeleteMapping("/posts/{postId}")
-    public ResponseEntity<ResponseDataDto> postDelete(@PathVariable Long postId,
+    public ResponseEntity<ResponseDto> postDelete(@PathVariable Long postId,
                                   @AuthenticationPrincipal UserDetailsImpl userDetailsImpl){
         ResponseDto responseDto = postService.deletePost(postId, userDetailsImpl);
-        ResponseDataDto dataDto = new ResponseDataDto(201, "게시글이 성공적으로 삭제되었습니다.",responseDto);
-        return new ResponseEntity<>(dataDto, HttpStatus.OK);
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
 }

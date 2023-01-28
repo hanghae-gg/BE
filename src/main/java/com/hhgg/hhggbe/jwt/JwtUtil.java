@@ -1,5 +1,9 @@
 package com.hhgg.hhggbe.jwt;
 
+import com.hhgg.hhggbe.security.UserDetailsServiceImpl;
+import com.hhgg.hhggbe.user.entity.UserRoleEnum;
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;

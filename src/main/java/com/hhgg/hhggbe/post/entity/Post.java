@@ -24,6 +24,8 @@ public class Post extends Timestamped {
     private String content;
     private String imageUrl;
     private Long visit = 0L;
+    @ManyToOne
+    private User user;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     @JsonIgnore
@@ -34,6 +36,7 @@ public class Post extends Timestamped {
         this.imageUrl = imageUrl;
         this.title = postRequestDto.getTitle();
         this.content = postRequestDto.getContent();
+        this.user = user;
     }
 
     public void PostPatch(PostRequestDto postRequestDto, String imageUrl){
