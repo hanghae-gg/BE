@@ -1,4 +1,5 @@
 package com.hhgg.hhggbe.user;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -6,8 +7,16 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@RequiredArgsConstructor
 @EnableWebSecurity // 스프링 Security 지원을 가능하게 함
 public class WebSecurityConfig {
+
+    private final UserDetailsServiceImpl userDetailsService;
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
@@ -22,10 +31,14 @@ public class WebSecurityConfig {
         // CSRF 설정
         http.csrf().disable();
 
-        http.authorizeRequests().anyRequest().authenticated();
+        http.authorizeRequests().antMatchers("/users/**").permitAll()
+                .anyRequest().authenticated();
 
-        // 로그인 사용
-        http.formLogin();
+        // Custom 로그인 페이지 사용
+        http.formLogin().loginPage("/users/login").permitAll();
+
+        // Custom Filter 등록하기
+        http.addFilterBefore(new CustomSecurityFilter(userDetailsService, passwordEncoder()), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
