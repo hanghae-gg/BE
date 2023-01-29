@@ -1,11 +1,9 @@
 package com.hhgg.hhggbe.comment.dto;
 
 import com.hhgg.hhggbe.comment.entity.Comment;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Data
 @Getter
 @NoArgsConstructor
 public class CommentDto {

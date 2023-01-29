@@ -82,8 +82,14 @@ public class PostService {
                 continue;
             }
             List<Comment> comments = post.getComments();
-            List<CommentDto> commentDto = comments.stream().map(CommentDto::new).collect(Collectors.toList());
-            PostResponseDto postResponseDto = new PostResponseDto(post, commentDto);
+            List<CommentDto> commentList = new ArrayList<>();
+            for(Comment comment: comments) {
+                if(comment.getDeletedAt() != null) {
+                    continue;
+                }
+                commentList.add(new CommentDto(comment));
+            }
+            PostResponseDto postResponseDto = new PostResponseDto(post, commentList);
             postResponseDtos.add(postResponseDto);
         }
         return postResponseDtos;

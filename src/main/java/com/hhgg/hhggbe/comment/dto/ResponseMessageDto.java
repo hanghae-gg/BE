@@ -1,8 +1,10 @@
 package com.hhgg.hhggbe.comment.dto;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class ResponseMessageDto {
     int status;
     String message;
