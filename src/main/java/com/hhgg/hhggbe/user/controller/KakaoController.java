@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/member")
+@RequestMapping("/users")
 public class KakaoController {
 
 
@@ -25,7 +25,7 @@ public class KakaoController {
         return "kakaoCI/login";
     }
 
-    @GetMapping("/kakao")
+    @GetMapping("/login")
     public String getCI(@RequestParam String code, Model model) throws IOException, IOException {
         System.out.println("code = " + code);
         String access_token = ks.getToken(code);
