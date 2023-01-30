@@ -42,16 +42,16 @@ public class UserService {
         User user = new User(username, email, password, userRoleEnum);
         userRepository.save(user);
     }
-//    public boolean idCheck(SignupRequestDto signupRequestDto) {
-//        String username = signupRequestDto.getUsername();
-//        boolean result;
-//        if (userRepository.findByUsername(username).isPresent()) {
-//            result = false;
-//        } else {
-//            result =  true;
-//        }
-//        return result;
-//    }
+    public boolean idCheck(SignupRequestDto signupRequestDto) {
+        String username = signupRequestDto.getUsername();
+        boolean result;
+        if (userRepository.findByUsername(username).isPresent()) {
+            result = false;
+        } else {
+            result =  true;
+        }
+        return result;
+    }
 
     public LoginErrorMessage login(LoginRequestDto loginRequestDto, HttpServletResponse response) {
         String username = loginRequestDto.getUsername();
