@@ -21,10 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,20 +30,20 @@ public class PostService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
     private final CommentRepository commentRepository;
-    private String S3Bucket = "";  // bucket이름
+    private String S3Bucket = "opggpost";  // bucket이름
 
     @Autowired
     AmazonS3Client amazonS3Client;
 
 
     //게시물 작성
+    @Transactional
     public PostResponseDto createPost(PostRequestDto postRequestDto,
                                       MultipartFile imageUrl,
                                       UserDetailsImpl userDetailsImpl) throws IOException {
         String imageUrlString;
-
         if (imageUrl != null) {
-            if (!imageUrl.getOriginalFilename().equals("")) {
+            if (!Objects.equals(imageUrl.getOriginalFilename(), "")) {
                 String originName = UUID.randomUUID().toString();
                 long size = imageUrl.getSize();
 
@@ -73,6 +70,7 @@ public class PostService {
 
 
     // 게시물 모두 불러오기
+    @Transactional(readOnly = true)
     public List<PostResponseDto> readPosts() {
         List<Post> posts = postRepository.findAllByOrderByCreateAtDesc();
         List<PostResponseDto> postResponseDtos = new ArrayList<>();
@@ -97,6 +95,7 @@ public class PostService {
 
 
     //특정 게시물 불러오기
+    @Transactional(readOnly = true)
     public PostResponseDto readPost(Long postId){
         Post post = postRepository.findByPostId(postId).orElseThrow(
                 () -> new IllegalArgumentException("해당 아이디의 게시글이 존재하지 않습니다.")
