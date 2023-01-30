@@ -1,7 +1,5 @@
 package com.hhgg.hhggbe.post.controller;
 
-import com.amazonaws.Response;
-import com.hhgg.hhggbe.post.dto.ResponseDataDto;
 import com.hhgg.hhggbe.post.repository.PostRepository;
 import com.hhgg.hhggbe.post.dto.PostRequestDto;
 import com.hhgg.hhggbe.post.dto.PostResponseDto;
@@ -10,6 +8,7 @@ import com.hhgg.hhggbe.post.service.PostService;
 import com.hhgg.hhggbe.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -34,9 +32,9 @@ public class PostController {
     }
 
     // 게시글 작성하기
-    @PostMapping("/posts")
-    public ResponseEntity<PostResponseDto> postCreate(@RequestBody PostRequestDto postRequestDto,
-                                      @RequestParam(value = "imageUrl", required = false)MultipartFile imageUrl,
+    @PostMapping(value = "/posts", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<PostResponseDto> postCreate(@RequestPart PostRequestDto postRequestDto,
+                                      @RequestPart(value = "imageUrl") MultipartFile imageUrl,
                                       @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) throws IOException {
         PostResponseDto postResponseDto = postService.createPost(postRequestDto, imageUrl, userDetailsImpl);
         return new ResponseEntity<>(postResponseDto, HttpStatus.CREATED);
