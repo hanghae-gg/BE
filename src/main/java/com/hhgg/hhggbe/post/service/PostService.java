@@ -95,7 +95,7 @@ public class PostService {
 
 
     //특정 게시물 불러오기
-    @Transactional(readOnly = true)
+    @Transactional
     public PostResponseDto readPost(Long postId){
         Post post = postRepository.findByPostId(postId).orElseThrow(
                 () -> new IllegalArgumentException("해당 아이디의 게시글이 존재하지 않습니다.")
@@ -104,11 +104,11 @@ public class PostService {
         if (post.isDelete()){
             throw new IllegalArgumentException("이미 삭제된 게시물입니다.");
         }
-        post.PostVisit();
-        postRepository.save(post);  // post를 불러오기 전에 visit를 증가시키고 저장
+        post.PostVisit();   // post를 불러오기 전에 visit를 증가시키고 저장
 
-        List<Comment> comments = post.getComments();
-        List<CommentDto> commentDto = comments.stream().map(CommentDto::new).collect(Collectors.toList());
+        List<Comment> comments = commentRepository.findAllByPost_PostIdAndDeletedAtIsNull(post.getPostId()).orElse(new ArrayList<>());
+        List<CommentDto> commentDto = comments.stream().map(CommentDto::new).toList();
+
         return new PostResponseDto(post, commentDto);
     }
 

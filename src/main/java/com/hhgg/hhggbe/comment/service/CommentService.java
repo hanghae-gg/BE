@@ -27,7 +27,7 @@ public class CommentService {
     @Transactional(readOnly = true)
     public CommentListDto get(Long id) {
         //게시글 id 로 댓글 찾기 <- 없을 시 빈 리스트
-        List<Comment> comments = commentRepository.findAllByPost_PostId(id).orElse(new ArrayList<>());
+        List<Comment> comments = commentRepository.findAllByPost_PostIdAndDeletedAtIsNull(id).orElse(new ArrayList<>());
         List<CommentDto> commentDto = comments.stream().map(CommentDto::new).collect(Collectors.toList());
         return new CommentListDto(commentDto);
     }
