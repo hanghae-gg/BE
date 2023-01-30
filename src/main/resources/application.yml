@@ -14,3 +14,9 @@
 #    hibernate:
 #      ddl-auto: none
 #    show-sql: true
+
+spring:
+  jpa:
+    hibernate:
+      jdbc:
+        time_zone: Asia/Seoul
