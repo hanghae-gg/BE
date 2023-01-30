@@ -19,7 +19,7 @@ public class AWSConfig {
     @Value("${cloud.aws.credentials.secret-key}")
     private String iamSecretKey = "IAM 생성할 때 확인했던 SecretKey 입력"; // IAM Secret Key
     //@Value("${cloud.aws.region.static}")
-    private String region = "ap-northeast-2"; // Bucket Region
+    private String region = "us-east-1"; // Bucket Region
 
     @Bean
     public AmazonS3Client amazonS3Client() {
