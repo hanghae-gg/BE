@@ -33,4 +33,8 @@ public class UserController {
         return userService.login(loginRequestDto, response);
     }
 
+    @PostMapping("/idcheck")
+    public String idCheck(@RequestBody SignupRequestDto signupRequestDto) {
+        return userService.idCheck(signupRequestDto);
+    }
 }

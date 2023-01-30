@@ -42,6 +42,16 @@ public class UserService {
         User user = new User(username, email, password, userRoleEnum);
         userRepository.save(user);
     }
+    public String idCheck(SignupRequestDto signupRequestDto) {
+        String username = signupRequestDto.getUsername();
+        String result;
+        if (userRepository.findByUsername(username).isPresent()) {
+            result = "이미 사용중인 아이디입니다.";
+        } else {
+            result =  "사용 가능한 아이디입니다.";
+        }
+        return result;
+    }
 
     public LoginErrorMessage login(LoginRequestDto loginRequestDto, HttpServletResponse response) {
         String username = loginRequestDto.getUsername();
