@@ -4,6 +4,7 @@ import com.hhgg.hhggbe.user.dto.*;
 import com.hhgg.hhggbe.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpServletResponse;
@@ -34,7 +35,13 @@ public class UserController {
     }
 
     @PostMapping("/idcheck")
-    public String idCheck(@RequestBody SignupRequestDto signupRequestDto) {
-        return userService.idCheck(signupRequestDto);
+    public ResponseEntity<String> idCheck(@RequestBody SignupRequestDto signupRequestDto) {
+        boolean result = userService.idCheck(signupRequestDto);
+        if (result) {
+            return new ResponseEntity<>("사용가능한 아이디입니다.", HttpStatusCode.valueOf(200));
+        }else{
+            return new ResponseEntity<>("이미 사용된 아이디입니다.", HttpStatusCode.valueOf(400));
+
+        }
     }
 }

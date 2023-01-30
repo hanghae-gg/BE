@@ -42,13 +42,13 @@ public class UserService {
         User user = new User(username, email, password, userRoleEnum);
         userRepository.save(user);
     }
-    public String idCheck(SignupRequestDto signupRequestDto) {
+    public boolean idCheck(SignupRequestDto signupRequestDto) {
         String username = signupRequestDto.getUsername();
-        String result;
+        boolean result;
         if (userRepository.findByUsername(username).isPresent()) {
-            result = "이미 사용중인 아이디입니다.";
+            result = false;
         } else {
-            result =  "사용 가능한 아이디입니다.";
+            result =  true;
         }
         return result;
     }
