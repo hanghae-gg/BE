@@ -1,5 +1,5 @@
 HELP.md
-src/main/resources/application-secret.properties
+application-secret.properties
 application.yml
 .gradle
 build/
