@@ -30,7 +30,7 @@ public class KakaoService {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=bb8c316ab6b257776807176ec5c9609c");
-            sb.append("&redirect_uri=http://hh.gg.s3-website.ap-northeast-2.amazonaws.com");
+            sb.append("&redirect_uri=http://localhost:3000");
             sb.append("&code=" + code);
 
             bw.write(sb.toString());
