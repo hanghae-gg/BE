@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/")
 public class KakaoController {
 
 
